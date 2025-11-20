@@ -1,0 +1,50 @@
+package is;
+
+import java.util.Random;
+import java.util.Scanner;
+
+public class TwoFactorAuthDemo {
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        // Step 1: Set username and password
+        String savedUsername = "admin";
+        String savedPassword = "1234";
+
+        // Step 2: Ask user to enter login credentials
+        System.out.print("Enter username: ");
+        String username = sc.nextLine();
+
+        System.out.print("Enter password: ");
+        String password = sc.nextLine();
+
+        // Step 3: Verify username and password
+        if (username.equals(savedUsername) && password.equals(savedPassword)) {
+            System.out.println("\nPassword verified!");
+
+            // Step 4: Generate OTP
+            Random rand = new Random();
+            int otp = rand.nextInt(9000) + 1000; // Generates 4-digit OTP
+            System.out.println("***************************");
+            System.out.println("Your OTP is: " + otp);
+            System.out.println("***************************\n");
+
+            // Step 5: Ask user to enter OTP
+            System.out.print("Enter OTP: ");
+            int enteredOtp = sc.nextInt();
+
+            // Step 6: Verify OTP
+            if (enteredOtp == otp) {
+                System.out.println("Login Successful! 2FA Verified.");
+            } else {
+                System.out.println("Incorrect OTP! Login Failed.");
+            }
+
+        } else {
+            System.out.println("Invalid username or password!");
+        }
+
+        sc.close();
+    }
+}
